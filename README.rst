@@ -35,6 +35,13 @@ See ``pillar.example`` file for details.
 
 Installs the PostgreSQL adapter for Python on Linux.
 
+``postgres.repmgr``
+----------------------
+
+Installs repmgr_ from 2ndquadrant.
+
+.. _repmgr: https://repmgr.org/
+
 ``postgres.server``
 -------------------
 
