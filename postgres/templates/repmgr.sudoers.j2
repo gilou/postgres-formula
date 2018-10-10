@@ -1,5 +1,5 @@
 Defaults:{{ user }} !requiretty
 {{ user }} ALL = NOPASSWD: /usr/bin/systemctl stop {{ service }}, \
   /usr/bin/systemctl start {{ service }}, \
-  /usr/bin/systemctl restart {{ service }} \
+  /usr/bin/systemctl restart {{ service }}, \
   /usr/bin/systemctl reload {{ service }}
