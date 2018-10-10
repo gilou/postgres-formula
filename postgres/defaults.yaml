@@ -65,12 +65,12 @@ postgres:
 
   pg_ident.conf: salt://postgres/templates/pg_ident.conf.j2
   identity_map: []
-  repmgr_conf:
-    node_id: {{ grains['nodename'] | regex_search('[0-9]+') }}
+
+  repmgr:
+    user: repmgr
+    database: repmgr
+    node_id: {{ grains['nodename'] | regex_search('[0-9]+')) }}
     node_name: {{ grains['nodename'] }}
-    repmgr_user: repmgr
-    repmgr_database: repmgr
-    data_dir: {{ postgres.data_dir }}
 
   config_backup: '.bak'
 
