@@ -27,7 +27,7 @@ postgresql-repmgr-conf:
         repmgr: {{ postgres.repmgr }}
         data_dir: {{ postgres.data_dir }}
 
-{%- if postgres.use_sudo %}
+{%- if postgres.repmgr.use_sudo %}
 postgres-repmgr-sudo:
   pkg.installed:
     - name: sudo
