@@ -26,3 +26,23 @@ postgresql-repmgr-conf:
     - defaults:
         repmgr: {{ postgres.repmgr }}
         data_dir: {{ postgres.data_dir }}
+
+{%- if postgres.use_sudo %}
+postgres-repmgr-sudo:
+  pkg.installed:
+    - name: sudo
+
+postgresql-repmgr-sudoers:
+  file.managed:
+    - name: /etc/sudoers.d/repmgr
+    - source: "salt://postgres/templates/repmgr.sudoers.j2"
+    - user: root
+    - group: root
+    - mode: 600
+    - template: jinja
+    - defaults:
+        service: {{ postgres.service }}
+        user: {{ postgres.user }}
+    - require:
+        - postgres-repmgr-sudo
+{% endif %}

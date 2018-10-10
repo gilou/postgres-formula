@@ -67,6 +67,8 @@ postgres:
   identity_map: []
 
   repmgr:
+    use_systemctl: True
+    use_sudo: True
     user: repmgr
     database: repmgr
     node_id: {{ grains['nodename'] | regex_search('.+([0-9]+)') | first }}
