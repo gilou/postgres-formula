@@ -69,7 +69,7 @@ postgres:
   repmgr:
     user: repmgr
     database: repmgr
-    node_id: {{ grains['nodename'] | regex_search('([0-9]+)') }}
+    node_id: {{ grains['nodename'] | regex_search('.+([0-9]+)') | first }}
     node_name: {{ grains['nodename'] }}
 
   config_backup: '.bak'
