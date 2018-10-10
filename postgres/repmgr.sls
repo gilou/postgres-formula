@@ -25,6 +25,7 @@ postgresql-repmgr-conf:
     - template: jinja
     - defaults:
         repmgr: {{ postgres.repmgr }}
+        service: {{ postgres.service }}   
         data_dir: {{ postgres.data_dir }}
 
 {%- if postgres.repmgr.use_sudo %}
