@@ -18,6 +18,7 @@ postgresql-repmgr:
 postgresql-repmgr-conf:
   file.managed:
     - name: {{ postgres.repmgr_conf_file }}
+    - source: {{ salt://postgres/templates/repmgr.conf.j2 }}
     - user: root
     - group: root
     - mode: 644
