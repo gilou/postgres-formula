@@ -15,3 +15,11 @@ postgresql-repmgr:
       - pkgrepo: postgresql-repo
   {% endif %}
 
+postgresql-repmgr-conf:
+  file.managed:
+    - name: {{ repmgr_conf_file }}
+    - user: root
+    - group: root
+    - mode: 644
+    - template: jinja
+    - context: {{ repmgr_config }}
