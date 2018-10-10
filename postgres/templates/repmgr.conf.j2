@@ -7,7 +7,7 @@ node_name={{ repmgr.node_name }}
 conninfo='host={{ repmgr.node_name }} user={{ repmgr.user }} dbname={{ repmgr.database }}'
 data_directory='{{ data_dir }}'
 {%- if repmgr.use_systemctl %}
-{%# This is a bit RedHat family specific, see https://repmgr.org/docs/4.1/configuration-file-service-commands.html for Debian %}
+{# This is a bit RedHat family specific, see https://repmgr.org/docs/4.1/configuration-file-service-commands.html for Debian #}
 {% for cmd in ['start', 'stop', 'restart', 'reload'] %}
 service_{{ cmd }}_command   = 'sudo systemctl {{ cmd }} {{ postgres.service}}'
 {% endfor %}
