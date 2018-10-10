@@ -22,4 +22,3 @@ postgresql-repmgr-conf:
     - group: root
     - mode: 644
     - template: jinja
-    - context: {{ repmgr_config }}
