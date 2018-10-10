@@ -70,7 +70,7 @@ postgres:
     node_name: {{ grains['nodename'] }}
     repmgr_user: repmgr
     repmgr_database: repmgr
-    data_dir: {{ data_dir }}
+    data_dir: {{ postgres.data_dir }}
 
   config_backup: '.bak'
 
