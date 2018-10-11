@@ -29,11 +29,21 @@ postgresql-repmgr-conf:
         data_dir: {{ postgres.data_dir }}
 
 {% set home = salt["user.info"](postgres.user).home %}
+postgresql-repmgr-ssh:
+  file.directory:
+    - name: {{ home }}/.ssh
+    - user: postgres.user
+    - group: postgres.user
+    - mode: 700
+
 postgresql-repmgr-sshkey:
   cmd.run:
     - name: ssh-keygen -t rsa -b 4096 -q -f {{ home }}/.ssh/id_rsa -N ""
     - creates:
       - {{ home }}/.ssh/id_rsa
+    - require:
+      - postgresql-repmgr-ssh
+
 
 {%- if postgres.repmgr.use_sudo %}
 postgres-repmgr-sudo:
