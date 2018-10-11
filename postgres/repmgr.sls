@@ -28,6 +28,13 @@ postgresql-repmgr-conf:
         service: {{ postgres.service }}   
         data_dir: {{ postgres.data_dir }}
 
+{% set home = salt["user.info"](postgres.user).home %}
+postgresql-repmgr-sshkey:
+  cmd.run:
+    - name: ssh-keygen -t rsa -b 4096 -q -f {{ home }}/.ssh/id_rsa -N ""
+    - creates:
+      - {{ home }}/.ssh/id_rsa
+
 {%- if postgres.repmgr.use_sudo %}
 postgres-repmgr-sudo:
   pkg.installed:
