@@ -47,6 +47,12 @@ postgresql-remgrd-conf:
       - file: postgresql-config-dir
     - watch_in:
       - module: postgresql-service-restart
+
+repmgr:
+  service.running:
+    - enable: True
+    - watch:
+      - postgresql-repmgr-conf
 {% endif %}
 
 {% set home = salt["user.info"](postgres.user).home %}
