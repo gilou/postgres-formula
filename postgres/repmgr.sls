@@ -25,6 +25,7 @@ postgresql-repmgr-conf:
     - mode: 644
     - template: jinja
     - defaults:
+        repmgr_conf_file: {{ postgres.repmgr_conf_file }}
         repmgr: {{ postgres.repmgr }}
         service: {{ postgres.service }}   
         data_dir: {{ postgres.data_dir }}

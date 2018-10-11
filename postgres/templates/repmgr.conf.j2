@@ -13,3 +13,8 @@ service_{{ cmd }}_command   = 'sudo systemctl {{ cmd }} {{ service }}'
 {%- endfor %}
 {%- endif %}
 pg_bindir='{{ bin_dir }}'
+{%- if repmgr.use_repmgrd %}
+failover=automatic
+promote_command='{{ bin_dir }}/repmgr standby promote -f {{ repmgr_conf_file }} --log-to-file'
+follow_command='{{ bin_dir }}/repmgr standby follow -f {{ repmgr_conf_file }} --log-to-file --upstream-node-id=%n'
+{%- endif %}
