@@ -63,7 +63,7 @@ postgresql-repmgr-sshknown{{ host }}-{{ name }}:
   ssh_known_hosts.present:
         - user: {{ postgres.user }}
         - name: {{ host }}
-        - enc: {{ name[:-4] }}
+        - enc: {{ enc }}
         - key: {{ key }}
   {%- endfor %}
 {%- endfor %}
