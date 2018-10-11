@@ -48,7 +48,7 @@ postgresql-repmgr-sshkey:
 {%- set mine_keys = salt['mine.get']('n*', 'ssh.user_keys') %}
 {%- for host, users in mine_keys.items() %}
 {%- set pubkey = users[postgres.user]['id_rsa.pub'] %}
-postgresql-repmgr-sshauthkeys:
+postgresql-repmgr-sshauth{{ host }}:
   ssh_auth.present:
         - user: {{ postgres.user }}
         - name: {{ pubkey }}
