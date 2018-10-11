@@ -67,6 +67,7 @@ postgres:
   identity_map: []
 
   repmgr:
+    use_repmgrd: False
     use_systemctl: True
     use_sudo: True
     user: repmgr
