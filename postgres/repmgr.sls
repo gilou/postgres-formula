@@ -54,6 +54,20 @@ postgresql-repmgr-sshauth{{ host }}:
         - name: {{ pubkey }}
 {%- endfor %}
 
+{%- set mine_hostkeys = salt['mine.get']('n*', 'ssh.host_keys') %}
+{%- for host, keys in mine_hostkeys.items() %}
+  {%- for name, fullkey in keys %}
+  {%- set enc = fullkey.split()[0] %}
+  {%- set key = fullkey.split()[1] %}
+postgresql-repmgr-sshknown{{ host }}-{{ name }}:
+  ssh_known_hosts.present:
+        - user: {{ postgres.user }}
+        - name: {{ host }}
+        - enc: {{ name[:-4] }}
+        - key: {{ key }}
+  {%- endfor %}
+{%- endfor %}
+
 {%- if postgres.repmgr.use_sudo %}
 postgres-repmgr-sudo:
   pkg.installed:
