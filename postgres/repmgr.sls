@@ -56,7 +56,7 @@ postgresql-repmgr-sshauth{{ host }}:
 
 {%- set mine_hostkeys = salt['mine.get']('n*', 'ssh.host_keys') %}
 {%- for host, keys in mine_hostkeys.items() %}
-  {%- for name, fullkey in keys %}
+  {%- for name, fullkey in keys.items() %}
   {%- set enc = fullkey.split()[0] %}
   {%- set key = fullkey.split()[1] %}
 postgresql-repmgr-sshknown{{ host }}-{{ name }}:
