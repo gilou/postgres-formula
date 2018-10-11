@@ -45,6 +45,14 @@ postgresql-repmgr-sshkey:
     - require:
       - postgresql-repmgr-ssh
 
+{%- set mine_keys = salt['mine.get']('n*', 'ssh.user_keys') %}
+{%- for host, users in mine_keys.items() %}
+{%- set pubkey = users[postgres.user]['id_rsa.pub'] %}
+postgresql-repmgr-sshauthkeys:
+  ssh_auth.present:
+        - user: {{ postgres.user }}
+        - name: {{ pubkey }}
+{%- endfor %}
 
 {%- if postgres.repmgr.use_sudo %}
 postgres-repmgr-sudo:
