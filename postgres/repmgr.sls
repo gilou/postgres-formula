@@ -2,6 +2,7 @@
 
 include:
   - postgres.upstream
+  - postgres.server
 
 postgresql-repmgr:
   pkg.installed:
@@ -28,6 +29,24 @@ postgresql-repmgr-conf:
         service: {{ postgres.service }}   
         data_dir: {{ postgres.data_dir }}
         bin_dir: {{ postgres.bin_dir }}
+
+{% if postgres.repmgr.use_repmgrd %}
+postgresql-remgrd-conf:
+  file.blockreplace:
+    - name: {{ postgres.conf_dir }}/postgresql.conf
+    - marker_start: "# Managed by SaltStack: repmgrd extension"
+    - marker_end: "# Managed by SaltStack: end of salt managed zone for repmgrd--"
+    - content: |
+        shared_preload_libraries = 'repmgr'
+    - show_changes: True
+    - append_if_not_found: True
+    {#- Detect empty values (none, '') in the config_backup #}
+    - backup: {{ postgres.config_backup|default(false, true) }}
+    - require:
+      - file: postgresql-config-dir
+    - watch_in:
+      - module: postgresql-service-restart
+{% endif %}
 
 {% set home = salt["user.info"](postgres.user).home %}
 postgresql-repmgr-ssh:
