@@ -32,8 +32,8 @@ postgresql-repmgr-conf:
 postgresql-repmgr-ssh:
   file.directory:
     - name: {{ home }}/.ssh
-    - user: postgres.user
-    - group: postgres.user
+    - user: {{ postgres.user }}
+    - group: {{ postgres.user }}
     - mode: 700
 
 postgresql-repmgr-sshkey:
