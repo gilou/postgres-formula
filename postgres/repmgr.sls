@@ -27,6 +27,7 @@ postgresql-repmgr-conf:
         repmgr: {{ postgres.repmgr }}
         service: {{ postgres.service }}   
         data_dir: {{ postgres.data_dir }}
+        bin_dir: {{ postgres.bin_dir }}
 
 {% set home = salt["user.info"](postgres.user).home %}
 postgresql-repmgr-ssh:
