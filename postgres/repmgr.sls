@@ -48,8 +48,9 @@ postgresql-remgrd-conf:
     - watch_in:
       - module: postgresql-service-restart
 
-repmgr:
+repmgrd:
   service.running:
+    - name: {{ postgres.repmgrd_service }}
     - enable: True
     - watch:
       - postgresql-repmgr-conf

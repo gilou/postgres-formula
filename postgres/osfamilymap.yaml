@@ -46,6 +46,7 @@ RedHat:
   pkg_libs: postgresql{{ release }}-libs
   pkg_dev: postgresql{{ release }}-devel
   pkg_repmgr: repmgr{{release }}
+  repmgrd_service: repmgr{{release }}
   conf_dir: {{ data_dir }}
   repmgr_conf_file: /etc/repmgr/{{ repo.version }}/repmgr.conf
   data_dir: {{ data_dir }}

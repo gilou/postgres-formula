@@ -77,6 +77,7 @@ postgres:
 
   config_backup: '.bak'
 
+  repmgrd_service: repmgrd
   service: postgresql
 
   bake_image: False
