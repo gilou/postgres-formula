@@ -1,0 +1,6 @@
+{%- if postgresconf %}
+{{ postgresconf|indent(8) }}
+{%- endif %}
+{%- if db_port %}
+port = {{ db_port }}
+{%- endif %}

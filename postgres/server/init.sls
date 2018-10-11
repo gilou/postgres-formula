@@ -120,13 +120,10 @@ postgresql-conf:
     - name: {{ postgres.conf_dir }}/postgresql.conf
     - marker_start: "# Managed by SaltStack: listen_addresses: please do not edit"
     - marker_end: "# Managed by SaltStack: end of salt managed zone --"
-    - content: |
-        {%- if postgres.postgresconf %}
-        {{ postgres.postgresconf|indent(8) }}
-        {%- endif %}
-        {%- if db_port %}
-        port = {{ db_port }}
-        {%- endif %}
+    - source: salt://postgres/templates/postgresql.confblock.j2
+    - defaults:
+        conf: {{ postgres.postgresconf }}
+        db_port: {{ postgres.db_port }}
     - show_changes: True
     - append_if_not_found: True
     {#- Detect empty values (none, '') in the config_backup #}
