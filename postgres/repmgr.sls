@@ -39,6 +39,7 @@ postgresql-repmgr-ssh:
 postgresql-repmgr-sshkey:
   cmd.run:
     - name: ssh-keygen -t rsa -b 4096 -q -f {{ home }}/.ssh/id_rsa -N ""
+    - runas: {{ postgres.user }}
     - creates:
       - {{ home }}/.ssh/id_rsa
     - require:
