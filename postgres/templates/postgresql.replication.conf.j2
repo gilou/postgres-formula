@@ -18,6 +18,7 @@ max_wal_senders = 10
 # See: https://www.postgresql.org/docs/current/static/runtime-config-wal.html#GUC-WAL-LEVEL
 
 wal_level = 'hot_standby'
+wal_log_hints = 'on'
 
 # Enable read-only queries on a standby
 # (Note: this will be ignored on a primary but we recommend including
