@@ -42,6 +42,8 @@ postgresql-replication-conf:
     - template: jinja
     - defaults:
         use_repmgrd: {{ postgres.repmgr.use_repmgrd }}
+    - watch_in:
+      - module: postgresql-service-restart
 
 {% if postgres.repmgr.use_repmgrd %}
 repmgrd:
