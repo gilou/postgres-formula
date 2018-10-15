@@ -76,6 +76,7 @@ postgres:
     node_id: {{ grains['nodename'] | regex_search('.+([0-9]+)') | first }}
     node_name: {{ grains['nodename'] }}
     exchange_ssh_keys: False
+    monitoring_history: False
 
   config_backup: '.bak'
 
