@@ -44,5 +44,5 @@ archive_command = '/bin/true'
 #
 # wal_keep_segments = 5000
 {%- if standby_list %}
-synchronous_standby_names = '{{ len(standby_list) }} ({{ standby_list| join(",") }})'
+synchronous_standby_names = '{{ standby_list|count }} ({{ standby_list| join(",") }})'
 {%- endif %}
