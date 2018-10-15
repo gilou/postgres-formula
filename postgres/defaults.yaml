@@ -77,6 +77,7 @@ postgres:
     node_name: {{ grains['nodename'] }}
     exchange_ssh_keys: False
     monitoring_history: False
+    synchronous_standby_names: []
 
   config_backup: '.bak'
 
