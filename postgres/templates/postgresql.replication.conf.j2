@@ -43,6 +43,6 @@ archive_command = '/bin/true'
 # the standby is being cloned are retained until the standby starts up.
 #
 # wal_keep_segments = 5000
-{% if standby_list %}
+{%- if standby_list %}
 synchronous_standby_names = '{{ len(standby_list) }} ({{ standby_list| join(",") }})'
-{% endif %}
+{%- endif %}

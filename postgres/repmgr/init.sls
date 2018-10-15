@@ -45,7 +45,7 @@ postgresql-replication-conf:
     - template: jinja
     - defaults:
         use_repmgrd: {{ postgres.repmgr.use_repmgrd }}
-        standby_list: {{ postgres.repmgr.synchronous_standby_names }}
+        standby_list: {{ postgres.repmgr.synchronous_standby_names|yaml }}
     - watch_in:
       - module: postgresql-service-restart
 
