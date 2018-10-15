@@ -46,6 +46,7 @@ postgresql-replication-conf:
     - defaults:
         use_repmgrd: {{ postgres.repmgr.use_repmgrd }}
         standby_list: {{ postgres.repmgr.synchronous_standby_names|yaml }}
+        archive_command: {{ postgres.archive_command | default('/bin/true') }}
     - watch_in:
       - module: postgresql-service-restart
 
