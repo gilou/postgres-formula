@@ -1,11 +1,11 @@
 {% from tpldir + "/map.jinja" import postgres with context %}
-{%- set includes = ['postgres.upstream', 'postgres.server'] %}
-{%- if postgres.repmgr.exchange_ssh_keys %}
-{%-   includes.add('postgres.repmgr.ssh') %}
-{%- endif %}
+
 include:
-{%- for inc in includes %}
-  - {{ inc }}
+  - postgres.upstream
+  - postgres.server
+  {%- if postgres.repmgr.exchange_ssh_keys %}
+  - postgres.repmgr.ssh
+  {% endif %}
 {%- endfor %}
 
 postgresql-repmgr:
