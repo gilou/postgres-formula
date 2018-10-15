@@ -27,27 +27,23 @@ postgresql-repmgr-conf:
     - defaults:
         repmgr_conf_file: {{ postgres.repmgr_conf_file }}
         repmgr: {{ postgres.repmgr }}
-        service: {{ postgres.service }}   
+        service: {{ postgres.service }}
         data_dir: {{ postgres.data_dir }}
         bin_dir: {{ postgres.bin_dir }}
 
-{% if postgres.repmgr.use_repmgrd %}
-postgresql-remgrd-conf:
-  file.blockreplace:
-    - name: {{ postgres.conf_dir }}/postgresql.conf
-    - marker_start: "# Managed by SaltStack: repmgrd extension"
-    - marker_end: "# Managed by SaltStack: end of salt managed zone for repmgrd--"
-    - content: |
-        shared_preload_libraries = 'repmgr'
-    - show_changes: True
-    - append_if_not_found: True
-    {#- Detect empty values (none, '') in the config_backup #}
-    - backup: {{ postgres.config_backup|default(false, true) }}
-    - require:
-      - file: postgresql-config-dir
-    - watch_in:
-      - module: postgresql-service-restart
 
+postgresql-replication-conf:
+  file.managed:
+    - name: {{ postgres.conf_dir }}/postgresql.replication.conf
+    - source: "salt://postgres/templates/postgresql.replication.conf"
+    - user: root
+    - group: root
+    - mode: 644
+    - template: jinja
+    - defaults:
+        postgres: {{ postgres }}
+
+{% if postgres.repmgr.use_repmgrd %}
 repmgrd:
   service.running:
     - name: {{ postgres.repmgrd_service }}
@@ -55,6 +51,25 @@ repmgrd:
     - watch:
       - postgresql-repmgr-conf
 {% endif %}
+
+postgresql-replication-include:
+  file.blockreplace:
+    - name: {{ postgres.conf_dir }}/postgresql.conf
+    - marker_start: "# Managed by SaltStack: repmgr configuration"
+    - marker_end: "# Managed by SaltStack: end of salt managed zone for repmgr"
+    - content: |
+        include 'postgresql.replication.conf'
+    - show_changes: True
+    - append_if_not_found: True
+    {#- Detect empty values (none, '') in the config_backup #}
+    - backup: {{ postgres.config_backup|default(false, true) }}
+    - require:
+      - file: postgresql-config-dir
+    - watch:
+      - file: postgresql-replication-conf
+    - watch_in:
+      - module: postgresql-service-restart
+
 
 {% set home = salt["user.info"](postgres.user).home %}
 postgresql-repmgr-ssh:
