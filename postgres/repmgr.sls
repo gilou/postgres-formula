@@ -65,8 +65,6 @@ postgresql-replication-include:
     - backup: {{ postgres.config_backup|default(false, true) }}
     - require:
       - file: postgresql-config-dir
-    - watch:
-      - file: postgresql-replication-conf
     - watch_in:
       - module: postgresql-service-restart
 
