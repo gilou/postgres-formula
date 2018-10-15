@@ -41,7 +41,7 @@ postgresql-replication-conf:
     - mode: 644
     - template: jinja
     - defaults:
-        postgres: {{ postgres }}
+        use_repmgrd: {{ repmgr.use_repmgrd }}
 
 {% if postgres.repmgr.use_repmgrd %}
 repmgrd:

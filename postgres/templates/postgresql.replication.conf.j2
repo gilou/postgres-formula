@@ -1,4 +1,4 @@
-{% if postgres.repmgr.use_repmgrd %}
+{% if use_repmgrd %}
 shared_preload_libraries = 'repmgr'
 {% endif %}
 # Enable replication connections; set this figure to at least one more
