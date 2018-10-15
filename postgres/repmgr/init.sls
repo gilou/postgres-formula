@@ -1,4 +1,4 @@
-{% from tpldir + "/map.jinja" import postgres with context %}
+{% from "postgres/map.jinja" import postgres with context %}
 
 include:
   - postgres.upstream

@@ -1,4 +1,4 @@
-{% from tpldir + "/map.jinja" import postgres with context %}
+{% from salt.file.dirname(tpldir) ~ "/map.jinja" import postgres with context %}
 
 {% set home = salt["user.info"](postgres.user).home %}
 postgresql-repmgr-ssh:
@@ -40,5 +40,3 @@ postgresql-repmgr-sshknown-{{ host }}-{{ name }}:
         - key: {{ key }}
   {%- endfor %}
 {%- endfor %}
-
-
