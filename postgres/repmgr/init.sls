@@ -5,8 +5,7 @@ include:
   - postgres.server
   {%- if postgres.repmgr.exchange_ssh_keys %}
   - postgres.repmgr.ssh
-  {% endif %}
-{%- endfor %}
+  {%- endif %}
 
 postgresql-repmgr:
   pkg.installed:
