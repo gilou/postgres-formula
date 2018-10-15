@@ -35,7 +35,7 @@ postgresql-repmgr-conf:
 postgresql-replication-conf:
   file.managed:
     - name: {{ postgres.conf_dir }}/postgresql.replication.conf
-    - source: "salt://postgres/templates/postgresql.replication.conf"
+    - source: "salt://postgres/templates/postgresql.replication.conf.j2"
     - user: root
     - group: root
     - mode: 644
