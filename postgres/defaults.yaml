@@ -74,6 +74,7 @@ postgres:
     database: repmgr
     node_id: {{ grains['nodename'] | regex_search('.+([0-9]+)') | first }}
     node_name: {{ grains['nodename'] }}
+    exchange_ssh_keys: False
 
   config_backup: '.bak'
 
